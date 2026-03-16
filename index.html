@@ -126,7 +126,9 @@
         }
         .hero > * { position: relative; z-index: 1; }
         .hero-logo {
+            display: block;
             width: 180px; height: 180px;
+            max-width: 180px; max-height: 180px;
             margin: 0 auto 32px;
             animation: float 4s ease-in-out infinite;
             filter: drop-shadow(0 0 40px rgba(34,211,238,0.3)) drop-shadow(0 0 80px rgba(99,102,241,0.2));
@@ -304,7 +306,7 @@
     <div class="hero-bg"></div>
     <img src="logo.png" alt="GhostRoute — Telegram Proxy" class="hero-logo" width="180" height="180">
     <div class="hero-badge" data-ru="Telegram-прокси нового поколения" data-en="Next-gen Telegram proxy">Telegram-прокси нового поколения</div>
-    <h1 data-ru="Telegram работает.<br><em>Всегда.</em>" data-en="Telegram works.<br><em>Always.</em>">Telegram работает.<br><em>Всегда.</em></h1>
+    <h1><span data-ru="Telegram работает." data-en="Telegram works.">Telegram работает.</span><br><em data-ru="Всегда." data-en="Always.">Всегда.</em></h1>
     <p data-ru="Быстрый прокси только для Telegram. Без VPN, без приложений, без тормозов. Подключение за 30 секунд." data-en="Fast proxy for Telegram only. No VPN, no apps, no slowdowns. Connect in 30 seconds.">Быстрый прокси только для Telegram. Без VPN, без приложений, без тормозов. Подключение за 30 секунд.</p>
     <a href="https://t.me/GhostRouteX_bot" class="hero-cta" data-ru="&#9889; Попробовать бесплатно" data-en="&#9889; Try for free">&#9889; Попробовать бесплатно</a>
     <div class="hero-sub" data-ru="14 дней бесплатно · без карты · без регистрации" data-en="14 days free · no card · no signup">14 дней бесплатно · без карты · без регистрации</div>
@@ -413,22 +415,12 @@
         });
     });
 
-    // Language switching — uses textContent-safe approach with data attributes
+    // Language switching — all data attributes are plain text (no HTML)
     function setLang(lang) {
         document.documentElement.lang = lang;
         document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
             if (el.tagName === 'META') return;
-            // Elements with <br> or <em> in data attrs need HTML rendering
-            var val = el.getAttribute('data-' + lang);
-            if (val.indexOf('<') !== -1) {
-                // Trusted static content from data attributes (not user input)
-                el.textContent = '';
-                var temp = document.createElement('template');
-                temp.innerHTML = val;
-                el.appendChild(temp.content);
-            } else {
-                el.textContent = val;
-            }
+            el.textContent = el.getAttribute('data-' + lang);
         });
         document.querySelectorAll('.lang-btn').forEach(function(btn) {
             btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
