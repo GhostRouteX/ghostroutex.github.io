@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhostRoute — Быстрый прокси для Telegram</title>
+    <meta name="description" content="GhostRoute — быстрый и незаметный прокси для Telegram. Подключение за 30 секунд, 14 дней бесплатно. Fake-TLS шифрование, низкий пинг, без VPN.">
+    <meta name="keywords" content="MTProxy, Telegram proxy, Telegram прокси, прокси для телеграм, обход блокировки Telegram, fake-TLS, GhostRoute">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ghostroutex.github.io/">
+
+    <!-- Alternate language versions for SEO -->
+    <link rel="alternate" hreflang="ru" href="https://ghostroutex.github.io/">
+    <link rel="alternate" hreflang="en" href="https://ghostroutex.github.io/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://ghostroutex.github.io/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="GhostRoute — Быстрый прокси для Telegram">
+    <meta property="og:description" content="Подключение за 30 секунд. 14 дней бесплатно. Без VPN, без регистрации.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostroutex.github.io/">
+    <meta property="og:image" content="https://ghostroutex.github.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GhostRoute — Быстрый прокси для Telegram">
+    <meta name="twitter:description" content="Подключение за 30 секунд. 14 дней бесплатно. Без VPN, без регистрации.">
+    <meta name="twitter:image" content="https://ghostroutex.github.io/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-hover: #1a2332;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99,102,241,0.15);
+            --cyan: #22d3ee;
+            --pink: #c084fc;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-heading: #f8fafc;
+            --border: #1e293b;
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 50;
+            background: rgba(10,14,23,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1100px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 24px;
+        }
+        .logo {
+            font-size: 20px; font-weight: 700; color: var(--text-heading);
+            text-decoration: none; display: flex; align-items: center; gap: 8px;
+        }
+        .logo img { height: 28px; width: 28px; border-radius: 6px; }
+        .logo span { color: var(--accent-light); }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .lang-switch {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 8px; display: flex; overflow: hidden;
+        }
+        .lang-btn {
+            padding: 6px 14px; cursor: pointer; font-size: 13px; font-weight: 500;
+            color: var(--text-muted); background: transparent; border: none;
+            transition: all 0.2s;
+        }
+        .lang-btn.active { background: var(--accent); color: #fff; }
+        .nav-cta {
+            background: var(--accent); color: #fff; text-decoration: none;
+            padding: 8px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+            transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--accent-light); }
+
+        /* --- SECTIONS --- */
+        section { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* --- HERO --- */
+        .hero {
+            padding-top: 140px; padding-bottom: 80px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 800px; height: 800px; pointer-events: none;
+            background: radial-gradient(ellipse at center, rgba(34,211,238,0.06) 0%, rgba(99,102,241,0.04) 40%, transparent 70%);
+            z-index: 0;
+        }
+        .hero > * { position: relative; z-index: 1; }
+        .hero-logo {
+            width: 180px; height: 180px;
+            margin: 0 auto 32px;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 40px rgba(34,211,238,0.3)) drop-shadow(0 0 80px rgba(99,102,241,0.2));
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-glow); border: 1px solid rgba(99,102,241,0.3);
+            border-radius: 20px; padding: 6px 16px;
+            font-size: 13px; color: var(--accent-light); font-weight: 500;
+            margin-bottom: 24px;
+            animation: fade-up 0.6s ease-out both;
+        }
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800; color: var(--text-heading);
+            line-height: 1.15; margin-bottom: 20px;
+            animation: fade-up 0.6s ease-out 0.1s both;
+        }
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--cyan), var(--accent-light), var(--pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--text-muted); max-width: 600px; margin: 0 auto 36px;
+            animation: fade-up 0.6s ease-out 0.2s both;
+        }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+            color: #fff; text-decoration: none;
+            padding: 16px 36px; border-radius: 12px;
+            font-size: 18px; font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 40px var(--accent-glow), 0 4px 20px rgba(99,102,241,0.3);
+            animation: fade-up 0.6s ease-out 0.3s both;
+        }
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 60px rgba(99,102,241,0.4), 0 8px 30px rgba(99,102,241,0.3);
+        }
+        .hero-sub {
+            margin-top: 14px; font-size: 14px; color: var(--text-muted);
+            animation: fade-up 0.6s ease-out 0.4s both;
+        }
+
+        /* --- FEATURES --- */
+        .features { padding-bottom: 80px; }
+        .section-title {
+            text-align: center; font-size: clamp(24px, 3.5vw, 36px);
+            font-weight: 700; color: var(--text-heading); margin-bottom: 48px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .feature-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 28px;
+            transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            border-color: var(--accent); background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(99,102,241,0.1);
+        }
+        .feature-icon { font-size: 32px; margin-bottom: 14px; }
+        .feature-card h3 { font-size: 18px; font-weight: 600; color: var(--text-heading); margin-bottom: 8px; }
+        .feature-card p { font-size: 15px; color: var(--text-muted); }
+
+        /* --- HOW IT WORKS --- */
+        .how { padding-bottom: 80px; }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px; counter-reset: step;
+        }
+        .step {
+            text-align: center; padding: 32px 20px;
+            position: relative;
+        }
+        .step-num {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: var(--accent-glow); border: 2px solid var(--accent);
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 20px; font-weight: 700; color: var(--accent-light);
+            margin-bottom: 16px;
+            transition: box-shadow 0.3s;
+        }
+        .step:hover .step-num {
+            box-shadow: 0 0 20px rgba(99,102,241,0.4);
+        }
+        .step h3 { font-size: 17px; font-weight: 600; color: var(--text-heading); margin-bottom: 8px; }
+        .step p { font-size: 14px; color: var(--text-muted); }
+
+        /* --- FAQ --- */
+        .faq { padding-bottom: 100px; }
+        .faq-list { max-width: 700px; margin: 0 auto; }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+        .faq-q {
+            font-size: 16px; font-weight: 600; color: var(--text-heading);
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            transition: color 0.2s;
+        }
+        .faq-q:hover { color: var(--accent-light); }
+        .faq-q::after { content: '+'; font-size: 22px; color: var(--accent-light); transition: transform 0.2s; }
+        .faq-item.open .faq-q::after { transform: rotate(45deg); }
+        .faq-a {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s;
+            font-size: 15px; color: var(--text-muted);
+        }
+        .faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
+
+        /* --- FINAL CTA --- */
+        .final-cta {
+            text-align: center; padding-bottom: 100px;
+        }
+        .final-cta-box {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(99,102,241,0.08) 50%, rgba(34,211,238,0.05) 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 60px 40px;
+            position: relative; overflow: hidden;
+        }
+        .final-cta-box::before {
+            content: ''; position: absolute; top: -50%; right: -20%;
+            width: 400px; height: 400px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .final-cta-box > * { position: relative; }
+        .final-cta-box h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: var(--text-heading); margin-bottom: 16px; }
+        .final-cta-box p { color: var(--text-muted); margin-bottom: 28px; font-size: 17px; }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center; font-size: 13px; color: var(--text-muted);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 640px) {
+            .nav-cta { display: none; }
+            .hero { padding-top: 110px; padding-bottom: 60px; }
+            .hero-logo { width: 130px; height: 130px; margin-bottom: 24px; }
+            .hero-cta { padding: 14px 28px; font-size: 16px; }
+            .final-cta-box { padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="logo"><img src="logo.png" alt="GhostRoute">Ghost<span>Route</span></a>
+        <div class="nav-right">
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+                <button class="lang-btn" onclick="setLang('en')">EN</button>
+            </div>
+            <a href="https://t.me/GhostRouteX_bot" class="nav-cta" data-ru="Подключить" data-en="Connect">Подключить</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <img src="logo.png" alt="GhostRoute — Telegram Proxy" class="hero-logo" width="180" height="180">
+    <div class="hero-badge" data-ru="Telegram-прокси нового поколения" data-en="Next-gen Telegram proxy">Telegram-прокси нового поколения</div>
+    <h1 data-ru="Telegram работает.<br><em>Всегда.</em>" data-en="Telegram works.<br><em>Always.</em>">Telegram работает.<br><em>Всегда.</em></h1>
+    <p data-ru="Быстрый прокси только для Telegram. Без VPN, без приложений, без тормозов. Подключение за 30 секунд." data-en="Fast proxy for Telegram only. No VPN, no apps, no slowdowns. Connect in 30 seconds.">Быстрый прокси только для Telegram. Без VPN, без приложений, без тормозов. Подключение за 30 секунд.</p>
+    <a href="https://t.me/GhostRouteX_bot" class="hero-cta" data-ru="&#9889; Попробовать бесплатно" data-en="&#9889; Try for free">&#9889; Попробовать бесплатно</a>
+    <div class="hero-sub" data-ru="14 дней бесплатно · без карты · без регистрации" data-en="14 days free · no card · no signup">14 дней бесплатно · без карты · без регистрации</div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+    <h2 class="section-title" data-ru="Почему GhostRoute" data-en="Why GhostRoute">Почему GhostRoute</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3 data-ru="Невидимый трафик" data-en="Invisible traffic">Невидимый трафик</h3>
+            <p data-ru="Fake-TLS шифрование: ваш трафик выглядит как обычный HTTPS. Провайдер не видит, что вы в Telegram." data-en="Fake-TLS encryption: your traffic looks like regular HTTPS. Your ISP can't tell you're using Telegram.">Fake-TLS шифрование: ваш трафик выглядит как обычный HTTPS. Провайдер не видит, что вы в Telegram.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3 data-ru="Мгновенные сообщения" data-en="Instant messages">Мгновенные сообщения</h3>
+            <p data-ru="Низкий пинг и быстрые серверы. Сообщения доходят мгновенно, медиа загружается без задержек." data-en="Low latency, fast servers. Messages arrive instantly, media loads without delays.">Низкий пинг и быстрые серверы. Сообщения доходят мгновенно, медиа загружается без задержек.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🪶</div>
+            <h3 data-ru="Не трогает интернет" data-en="Doesn't touch your internet">Не трогает интернет</h3>
+            <p data-ru="Работает только для Telegram. Остальной интернет — на полной скорости. Не жрёт батарею, как VPN." data-en="Works for Telegram only. The rest of your internet stays full speed. Doesn't drain battery like a VPN.">Работает только для Telegram. Остальной интернет — на полной скорости. Не жрёт батарею, как VPN.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <h3 data-ru="30 секунд и готово" data-en="30 seconds to start">30 секунд и готово</h3>
+            <p data-ru="Никаких приложений. Откройте бота, получите ссылку, нажмите «Подключить» — всё прямо в Telegram." data-en="No apps needed. Open the bot, get your link, tap 'Connect' — all inside Telegram.">Никаких приложений. Откройте бота, получите ссылку, нажмите «Подключить» — всё прямо в Telegram.</p>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+    <h2 class="section-title" data-ru="Как подключиться" data-en="How to connect">Как подключиться</h2>
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <h3 data-ru="Откройте бота" data-en="Open the bot">Откройте бота</h3>
+            <p data-ru="Нажмите на ссылку @GhostRouteX_bot и отправьте /start" data-en="Tap @GhostRouteX_bot and send /start">Нажмите на ссылку @GhostRouteX_bot и отправьте /start</p>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <h3 data-ru="Получите ключ" data-en="Get your key">Получите ключ</h3>
+            <p data-ru="Бот мгновенно выдаст вашу персональную ссылку для подключения" data-en="The bot will instantly give you a personal connection link">Бот мгновенно выдаст вашу персональную ссылку для подключения</p>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <h3 data-ru="Подключитесь" data-en="Connect">Подключитесь</h3>
+            <p data-ru="Нажмите на ссылку — Telegram автоматически настроит прокси. Готово!" data-en="Tap the link — Telegram auto-configures the proxy. Done!">Нажмите на ссылку — Telegram автоматически настроит прокси. Готово!</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+    <h2 class="section-title" data-ru="Вопросы и ответы" data-en="FAQ">Вопросы и ответы</h2>
+    <div class="faq-list">
+        <div class="faq-item">
+            <div class="faq-q" data-ru="Чем это лучше VPN?" data-en="How is this better than a VPN?">Чем это лучше VPN?</div>
+            <div class="faq-a" data-ru="VPN пропускает весь трафик через сервер — это замедляет интернет и расходует батарею. GhostRoute работает только для Telegram: остальные приложения и сайты не затрагиваются." data-en="A VPN routes all traffic through a server — slowing down your internet and draining your battery. GhostRoute works for Telegram only: other apps and sites are not affected.">VPN пропускает весь трафик через сервер — это замедляет интернет и расходует батарею. GhostRoute работает только для Telegram: остальные приложения и сайты не затрагиваются.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" data-ru="Это безопасно?" data-en="Is it safe?">Это безопасно?</div>
+            <div class="faq-a" data-ru="Да. Используется Fake-TLS шифрование — ваш трафик неотличим от обычного HTTPS. Мы не видим содержимое сообщений: Telegram шифрует их end-to-end." data-en="Yes. Fake-TLS encryption makes your traffic indistinguishable from regular HTTPS. We can't see your messages — Telegram encrypts them end-to-end.">Да. Используется Fake-TLS шифрование — ваш трафик неотличим от обычного HTTPS. Мы не видим содержимое сообщений: Telegram шифрует их end-to-end.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" data-ru="Нужно ли устанавливать приложение?" data-en="Do I need to install an app?">Нужно ли устанавливать приложение?</div>
+            <div class="faq-a" data-ru="Нет. Вы получаете ссылку, нажимаете на неё — Telegram сам настраивает прокси. Работает на всех платформах: Android, iOS, Windows, macOS, Linux." data-en="No. You get a link, tap it — Telegram configures the proxy automatically. Works on all platforms: Android, iOS, Windows, macOS, Linux.">Нет. Вы получаете ссылку, нажимаете на неё — Telegram сам настраивает прокси. Работает на всех платформах: Android, iOS, Windows, macOS, Linux.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" data-ru="Сколько стоит?" data-en="How much does it cost?">Сколько стоит?</div>
+            <div class="faq-a" data-ru="Первые 14 дней — бесплатно, без ввода карты. Потом — доступная подписка через Telegram Stars." data-en="First 14 days — free, no card required. Then — affordable subscription via Telegram Stars.">Первые 14 дней — бесплатно, без ввода карты. Потом — доступная подписка через Telegram Stars.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" data-ru="Что если прокси заблокируют?" data-en="What if the proxy gets blocked?">Что если прокси заблокируют?</div>
+            <div class="faq-a" data-ru="Fake-TLS маскирует трафик под обычный HTTPS к популярным сайтам. Заблокировать его = заблокировать весь HTTPS-интернет, что практически невозможно." data-en="Fake-TLS disguises traffic as regular HTTPS to popular websites. Blocking it means blocking all HTTPS internet, which is practically impossible.">Fake-TLS маскирует трафик под обычный HTTPS к популярным сайтам. Заблокировать его = заблокировать весь HTTPS-интернет, что практически невозможно.</div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+    <div class="final-cta-box">
+        <h2 data-ru="Попробуйте прямо сейчас" data-en="Try it right now">Попробуйте прямо сейчас</h2>
+        <p data-ru="14 дней бесплатно. Подключение за 30 секунд. Без регистрации и карт." data-en="14 days free. Connect in 30 seconds. No signup, no card.">14 дней бесплатно. Подключение за 30 секунд. Без регистрации и карт.</p>
+        <a href="https://t.me/GhostRouteX_bot" class="hero-cta" data-ru="&#9889; Подключить GhostRoute" data-en="&#9889; Connect GhostRoute">&#9889; Подключить GhostRoute</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div style="margin-bottom: 10px;">
+        <a href="https://t.me/GhostRouteX_bot" style="color:var(--accent-light);text-decoration:none;margin:0 12px;" data-ru="Бот" data-en="Bot">Бот</a>
+        <span style="color:var(--border);">·</span>
+        <a href="https://t.me/GhostRouteX" style="color:var(--accent-light);text-decoration:none;margin:0 12px;" data-ru="Канал" data-en="Channel">Канал</a>
+    </div>
+    <span data-ru="GhostRoute · Быстрый и незаметный прокси для Telegram" data-en="GhostRoute · Fast and invisible Telegram proxy">GhostRoute · Быстрый и незаметный прокси для Telegram</span>
+</footer>
+
+<script>
+    // FAQ toggle
+    document.querySelectorAll('.faq-q').forEach(function(q) {
+        q.addEventListener('click', function() {
+            q.parentElement.classList.toggle('open');
+        });
+    });
+
+    // Language switching — uses textContent-safe approach with data attributes
+    function setLang(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
+            if (el.tagName === 'META') return;
+            // Elements with <br> or <em> in data attrs need HTML rendering
+            var val = el.getAttribute('data-' + lang);
+            if (val.indexOf('<') !== -1) {
+                // Trusted static content from data attributes (not user input)
+                el.textContent = '';
+                var temp = document.createElement('template');
+                temp.innerHTML = val;
+                el.appendChild(temp.content);
+            } else {
+                el.textContent = val;
+            }
+        });
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+        });
+        // Update page title and meta
+        if (lang === 'en') {
+            document.title = 'GhostRoute \u2014 Fast Telegram Proxy';
+            document.querySelector('meta[name="description"]').content = 'GhostRoute \u2014 fast and invisible Telegram proxy. Connect in 30 seconds, 14 days free. Fake-TLS encryption, low latency, no VPN needed.';
+        } else {
+            document.title = 'GhostRoute \u2014 Быстрый прокси для Telegram';
+            document.querySelector('meta[name="description"]').content = 'GhostRoute \u2014 быстрый и незаметный прокси для Telegram. Подключение за 30 секунд, 14 дней бесплатно. Fake-TLS шифрование, низкий пинг, без VPN.';
+        }
+        // Save preference and update URL
+        try { localStorage.setItem('lang', lang); } catch(e) {}
+        var url = new URL(window.location);
+        if (lang === 'en') url.searchParams.set('lang', 'en');
+        else url.searchParams.delete('lang');
+        history.replaceState(null, '', url);
+    }
+
+    // Auto-detect language on load
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var saved = (function() { try { return localStorage.getItem('lang'); } catch(e) { return null; } })();
+        var lang = params.get('lang') || saved || (navigator.language.startsWith('ru') ? 'ru' : 'en');
+        if (lang !== 'ru') setLang(lang);
+    })();
+</script>
+
+<!-- Structured data for SEO -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GhostRoute",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Fast and invisible Telegram proxy with Fake-TLS encryption",
+    "operatingSystem": "Android, iOS, Windows, macOS, Linux",
+    "image": "https://ghostroutex.github.io/logo.png",
+    "url": "https://ghostroutex.github.io/",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "14-day free trial"
+    }
+}
+</script>
+
+</body>
+</html>
