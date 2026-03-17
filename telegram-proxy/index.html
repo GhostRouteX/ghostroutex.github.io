@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прокси для Telegram — бесплатно 14 дней | GhostRoute</title>
+    <meta name="description" content="Бесплатный прокси для Telegram. Подключение за 30 секунд без VPN и приложений. Fake-TLS шифрование, низкий пинг, 14 дней бесплатно.">
+    <meta name="keywords" content="прокси для телеграм, telegram proxy бесплатно, прокси телеграм, бесплатный прокси telegram, proxy telegram">
+
+    <link rel="canonical" href="https://ghostroutex.github.io/telegram-proxy/">
+    <link rel="alternate" hreflang="ru" href="https://ghostroutex.github.io/telegram-proxy/">
+    <link rel="alternate" hreflang="en" href="https://ghostroutex.github.io/telegram-proxy/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://ghostroutex.github.io/telegram-proxy/">
+
+    <meta property="og:title" content="Прокси для Telegram — бесплатно 14 дней | GhostRoute">
+    <meta property="og:description" content="Бесплатный прокси для Telegram. Подключение за 30 секунд без VPN.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostroutex.github.io/telegram-proxy/">
+    <meta property="og:image" content="https://ghostroutex.github.io/og-image.png">
+
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="apple-touch-icon" href="../logo.png">
+
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg-card: #111827;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99,102,241,0.15);
+            --cyan: #22d3ee;
+            --pink: #c084fc;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-heading: #f8fafc;
+            --border: #1e293b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg); color: var(--text); line-height: 1.7;
+        }
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 50;
+            background: rgba(10,14,23,0.85); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 800px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 24px;
+        }
+        .logo {
+            font-size: 20px; font-weight: 700; color: var(--text-heading);
+            text-decoration: none; display: flex; align-items: center; gap: 8px;
+        }
+        .logo img { height: 28px; width: 28px; border-radius: 50%; object-fit: cover; }
+        .logo span { color: var(--accent-light); }
+        .nav-cta {
+            background: var(--accent); color: #fff; text-decoration: none;
+            padding: 8px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+            transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--accent-light); }
+        .article {
+            max-width: 800px; margin: 0 auto; padding: 100px 24px 60px;
+        }
+        .article h1 {
+            font-size: clamp(28px, 4vw, 42px); font-weight: 800;
+            color: var(--text-heading); line-height: 1.2; margin-bottom: 24px;
+        }
+        .article h1 .gradient {
+            background: linear-gradient(135deg, var(--cyan), var(--accent-light), var(--pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .article h2 {
+            font-size: 24px; font-weight: 700; color: var(--text-heading);
+            margin: 40px 0 16px;
+        }
+        .article p { margin-bottom: 16px; font-size: 17px; }
+        .article ul { margin: 0 0 16px 24px; }
+        .article li { margin-bottom: 8px; font-size: 17px; }
+        .cta-box {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(99,102,241,0.08) 50%, rgba(34,211,238,0.05) 100%);
+            border: 1px solid var(--border); border-radius: 20px;
+            padding: 40px; text-align: center; margin: 48px 0;
+        }
+        .cta-box h2 { margin-top: 0; }
+        .cta-box p { color: var(--text-muted); }
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+            color: #fff; text-decoration: none;
+            padding: 16px 36px; border-radius: 12px;
+            font-size: 18px; font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 40px var(--accent-glow), 0 4px 20px rgba(99,102,241,0.3);
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 60px rgba(99,102,241,0.4), 0 8px 30px rgba(99,102,241,0.3);
+        }
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px; text-align: center; font-size: 13px; color: var(--text-muted);
+        }
+        footer a { color: var(--accent-light); text-decoration: none; margin: 0 12px; }
+        @media (max-width: 640px) {
+            .article { padding-top: 80px; }
+            .cta-box { padding: 28px 20px; }
+            .cta-btn { padding: 14px 28px; font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="logo"><img src="../logo.png" alt="GhostRoute">Ghost<span>Route</span></a>
+        <a href="https://t.me/GhostRouteX_bot" class="nav-cta" data-ru="Подключить" data-en="Connect">Подключить</a>
+    </div>
+</nav>
+
+<article class="article">
+    <h1><span data-ru="Прокси для Telegram —" data-en="Telegram Proxy —">Прокси для Telegram —</span> <span class="gradient" data-ru="быстро, бесплатно, без VPN" data-en="fast, free, no VPN">быстро, бесплатно, без VPN</span></h1>
+
+    <p data-ru="Telegram заблокирован или работает медленно? GhostRoute — это MTProxy нового поколения с Fake-TLS шифрованием. Подключение занимает 30 секунд, не нужны ни VPN, ни дополнительные приложения." data-en="Telegram blocked or slow? GhostRoute is a next-generation MTProxy with Fake-TLS encryption. Connection takes 30 seconds, no VPN or extra apps needed.">Telegram заблокирован или работает медленно? GhostRoute — это MTProxy нового поколения с Fake-TLS шифрованием. Подключение занимает 30 секунд, не нужны ни VPN, ни дополнительные приложения.</p>
+
+    <h2 data-ru="Что такое прокси для Telegram?" data-en="What is a Telegram proxy?">Что такое прокси для Telegram?</h2>
+    <p data-ru="Прокси — это промежуточный сервер, который передаёт трафик между вашим устройством и Telegram. В отличие от VPN, прокси работает только для Telegram: весь остальной интернет идёт напрямую на полной скорости." data-en="A proxy is an intermediary server that relays traffic between your device and Telegram. Unlike a VPN, a proxy works only for Telegram: all other internet traffic goes directly at full speed.">Прокси — это промежуточный сервер, который передаёт трафик между вашим устройством и Telegram. В отличие от VPN, прокси работает только для Telegram: весь остальной интернет идёт напрямую на полной скорости.</p>
+
+    <h2 data-ru="Почему GhostRoute?" data-en="Why GhostRoute?">Почему GhostRoute?</h2>
+    <ul>
+        <li data-ru="Fake-TLS шифрование — трафик неотличим от обычного HTTPS" data-en="Fake-TLS encryption — traffic is indistinguishable from regular HTTPS">Fake-TLS шифрование — трафик неотличим от обычного HTTPS</li>
+        <li data-ru="Низкий пинг — сообщения доходят мгновенно" data-en="Low latency — messages arrive instantly">Низкий пинг — сообщения доходят мгновенно</li>
+        <li data-ru="Работает на всех платформах: Android, iOS, Windows, macOS, Linux" data-en="Works on all platforms: Android, iOS, Windows, macOS, Linux">Работает на всех платформах: Android, iOS, Windows, macOS, Linux</li>
+        <li data-ru="Не разряжает батарею, как VPN" data-en="Doesn't drain battery like a VPN">Не разряжает батарею, как VPN</li>
+        <li data-ru="14 дней бесплатно — без карты, без регистрации" data-en="14 days free — no card, no signup">14 дней бесплатно — без карты, без регистрации</li>
+    </ul>
+
+    <h2 data-ru="Как подключиться?" data-en="How to connect?">Как подключиться?</h2>
+    <p data-ru="Откройте бота @GhostRouteX_bot в Telegram, отправьте /start и получите персональную ссылку. Нажмите на неё — Telegram автоматически настроит прокси. Никаких приложений, никаких настроек вручную." data-en="Open @GhostRouteX_bot in Telegram, send /start and get your personal link. Tap it — Telegram auto-configures the proxy. No apps, no manual setup.">Откройте бота @GhostRouteX_bot в Telegram, отправьте /start и получите персональную ссылку. Нажмите на неё — Telegram автоматически настроит прокси. Никаких приложений, никаких настроек вручную.</p>
+
+    <div class="cta-box">
+        <h2 data-ru="Попробуйте бесплатно" data-en="Try for free">Попробуйте бесплатно</h2>
+        <p data-ru="14 дней без ограничений. Подключение за 30 секунд." data-en="14 days with no limits. Connect in 30 seconds.">14 дней без ограничений. Подключение за 30 секунд.</p>
+        <a href="https://t.me/GhostRouteX_bot" class="cta-btn" data-ru="&#9889; Подключить GhostRoute" data-en="&#9889; Connect GhostRoute">&#9889; Подключить GhostRoute</a>
+    </div>
+</article>
+
+<footer>
+    <div style="margin-bottom: 10px;">
+        <a href="https://t.me/GhostRouteX_bot" data-ru="Бот" data-en="Bot">Бот</a>
+        <span style="color:var(--border);">·</span>
+        <a href="https://t.me/GhostRouteX" data-ru="Канал" data-en="Channel">Канал</a>
+        <span style="color:var(--border);">·</span>
+        <a href="../" data-ru="Главная" data-en="Home">Главная</a>
+    </div>
+    <span data-ru="GhostRoute · Быстрый и незаметный прокси для Telegram" data-en="GhostRoute · Fast and invisible Telegram proxy">GhostRoute · Быстрый и незаметный прокси для Telegram</span>
+</footer>
+
+<script>
+    function setLang(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
+            if (el.tagName === 'META') return;
+            el.textContent = el.getAttribute('data-' + lang);
+        });
+        if (lang === 'en') {
+            document.title = 'Telegram Proxy — free 14 days | GhostRoute';
+            document.querySelector('meta[name="description"]').content = 'Free Telegram proxy. Connect in 30 seconds without VPN or apps. Fake-TLS encryption, low latency, 14 days free.';
+        } else {
+            document.title = 'Прокси для Telegram — бесплатно 14 дней | GhostRoute';
+            document.querySelector('meta[name="description"]').content = 'Бесплатный прокси для Telegram. Подключение за 30 секунд без VPN и приложений. Fake-TLS шифрование, низкий пинг, 14 дней бесплатно.';
+        }
+        try { localStorage.setItem('lang', lang); } catch(e) {}
+    }
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var saved = (function() { try { return localStorage.getItem('lang'); } catch(e) { return null; } })();
+        var lang = params.get('lang') || saved || (navigator.language.startsWith('ru') ? 'ru' : 'en');
+        if (lang !== 'ru') setLang(lang);
+    })();
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Прокси для Telegram — быстро, бесплатно, без VPN",
+    "description": "Бесплатный прокси для Telegram с Fake-TLS шифрованием. Подключение за 30 секунд.",
+    "author": {"@type": "Organization", "name": "GhostRoute"},
+    "publisher": {"@type": "Organization", "name": "GhostRoute", "logo": {"@type": "ImageObject", "url": "https://ghostroutex.github.io/logo.png"}},
+    "mainEntityOfPage": "https://ghostroutex.github.io/telegram-proxy/"
+}
+</script>
+
+</body>
+</html>
