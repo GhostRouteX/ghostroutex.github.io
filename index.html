@@ -90,7 +90,7 @@
             text-decoration: none; display: flex; align-items: center; gap: 8px;
         }
         .logo img { height: 28px; width: 28px; border-radius: 50%; object-fit: cover; }
-        .logo span { color: var(--accent-light); }
+        .logo > span > span { color: var(--accent-light); }
         .nav-right { display: flex; align-items: center; gap: 16px; }
         .lang-switch {
             background: var(--bg-card); border: 1px solid var(--border);
@@ -290,7 +290,7 @@
 <!-- NAV -->
 <nav>
     <div class="nav-inner">
-        <a href="#" class="logo"><img src="logo.png" alt="GhostRoute">Ghost<span>Route</span></a>
+        <a href="#" class="logo"><img src="logo.png" alt="GhostRoute"><span>Ghost<span>Route</span></span></a>
         <div class="nav-right">
             <div class="lang-switch">
                 <button class="lang-btn active" onclick="setLang('ru')">RU</button>
