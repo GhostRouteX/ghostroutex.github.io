@@ -202,6 +202,23 @@
         .feature-card h3 { font-size: 18px; font-weight: 600; color: var(--text-heading); margin-bottom: 8px; }
         .feature-card p { font-size: 15px; color: var(--text-muted); }
 
+        /* --- SEO INFO --- */
+        .seo-info { padding-bottom: 80px; }
+        .seo-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px; margin-top: 32px;
+        }
+        .seo-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 28px;
+        }
+        .seo-card h3 { font-size: 18px; font-weight: 600; color: var(--text-heading); margin-bottom: 12px; }
+        .seo-card p { font-size: 15px; color: var(--text-muted); margin-bottom: 12px; }
+        .seo-card p:last-child { margin-bottom: 0; }
+        .seo-card a { color: var(--accent-light); text-decoration: none; font-size: 15px; }
+        .seo-card a:hover { text-decoration: underline; }
+
         /* --- HOW IT WORKS --- */
         .how { padding-bottom: 80px; }
         .steps {
@@ -246,7 +263,7 @@
             max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s;
             font-size: 15px; color: var(--text-muted);
         }
-        .faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
+        .faq-item.open .faq-a { max-height: 300px; padding-top: 12px; }
 
         /* --- FINAL CTA --- */
         .final-cta {
@@ -282,6 +299,7 @@
             .hero-logo { width: 130px; height: 130px; margin-bottom: 24px; }
             .hero-cta { padding: 14px 28px; font-size: 16px; }
             .final-cta-box { padding: 40px 24px; }
+            .seo-info-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -339,6 +357,34 @@
     </div>
 </section>
 
+<!-- SEO INFO -->
+<section class="seo-info">
+    <h2 class="section-title" data-ru="Telegram тормозит? Решение есть" data-en="Telegram slow? There's a fix">Telegram тормозит? Решение есть</h2>
+    <div class="seo-info-grid">
+        <div class="seo-card">
+            <h3 data-ru="Как ускорить Telegram" data-en="How to speed up Telegram">Как ускорить Telegram</h3>
+            <p data-ru="Telegram замедляется, когда провайдер ограничивает трафик к серверам мессенджера. GhostRoute направляет только Telegram-трафик через зашифрованный канал с Fake-TLS — провайдер не может отличить его от обычного HTTPS и не может замедлить." data-en="Telegram slows down when your ISP throttles traffic to the messenger's servers. GhostRoute routes only Telegram traffic through an encrypted Fake-TLS channel — the ISP can't distinguish it from regular HTTPS and can't throttle it.">Telegram замедляется, когда провайдер ограничивает трафик к серверам мессенджера. GhostRoute направляет только Telegram-трафик через зашифрованный канал с Fake-TLS — провайдер не может отличить его от обычного HTTPS и не может замедлить.</p>
+            <p>
+                <a href="/telegram-proxy/" data-ru="Подробнее о прокси для Telegram →" data-en="More about Telegram proxy →">Подробнее о прокси для Telegram →</a>
+            </p>
+        </div>
+        <div class="seo-card">
+            <h3 data-ru="Медленная загрузка медиа и сообщений" data-en="Slow media and message loading">Медленная загрузка медиа и сообщений</h3>
+            <p data-ru="Фото не грузятся, голосовые подвисают, видео буферизуется? Это признаки того, что соединение с серверами Telegram ограничено. Прокси GhostRoute восстанавливает полную скорость — при этом остальной интернет работает как обычно." data-en="Photos won't load, voice messages freeze, videos buffer? These are signs your connection to Telegram servers is being throttled. GhostRoute proxy restores full speed — while the rest of your internet works as usual.">Фото не грузятся, голосовые подвисают, видео буферизуется? Это признаки того, что соединение с серверами Telegram ограничено. Прокси GhostRoute восстанавливает полную скорость — при этом остальной интернет работает как обычно.</p>
+            <p>
+                <a href="/mtproxy-vs-vpn/" data-ru="Почему прокси лучше VPN для Telegram →" data-en="Why proxy is better than VPN for Telegram →">Почему прокси лучше VPN для Telegram →</a>
+            </p>
+        </div>
+        <div class="seo-card">
+            <h3 data-ru="Бесплатный прокси для Telegram" data-en="Free Telegram proxy">Бесплатный прокси для Telegram</h3>
+            <p data-ru="14 дней бесплатно — без карты и регистрации. Настройка за 30 секунд через Telegram-бота: получаете персональный ключ и нажимаете одну кнопку. В отличие от публичных прокси-списков, GhostRoute автоматически обновляет серверы." data-en="14 days free — no card, no signup. Setup in 30 seconds via Telegram bot: get your personal key and tap one button. Unlike public proxy lists, GhostRoute auto-rotates servers.">14 дней бесплатно — без карты и регистрации. Настройка за 30 секунд через Telegram-бота: получаете персональный ключ и нажимаете одну кнопку. В отличие от публичных прокси-списков, GhostRoute автоматически обновляет серверы.</p>
+            <p>
+                <a href="/how-to-setup-mtproxy/" data-ru="Пошаговая настройка MTProxy →" data-en="Step-by-step MTProxy setup →">Пошаговая настройка MTProxy →</a>
+            </p>
+        </div>
+    </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="how">
     <h2 class="section-title" data-ru="Как подключиться" data-en="How to connect">Как подключиться</h2>
@@ -371,7 +417,7 @@
         </div>
         <div class="faq-item">
             <div class="faq-q" data-ru="Это безопасно?" data-en="Is it safe?">Это безопасно?</div>
-            <div class="faq-a" data-ru="Да. Используется Fake-TLS шифрование — ваш трафик неотличим от обычного HTTPS. Мы не видим содержимое сообщений: Telegram шифрует их end-to-end." data-en="Yes. Fake-TLS encryption makes your traffic indistinguishable from regular HTTPS. We can't see your messages — Telegram encrypts them end-to-end.">Да. Используется Fake-TLS шифрование — ваш трафик неотличим от обычного HTTPS. Мы не видим содержимое сообщений: Telegram шифрует их end-to-end.</div>
+            <div class="faq-a" data-ru="Да. Telegram шифрует весь трафик протоколом MTProto 2.0. Прокси-сервер передает только зашифрованные пакеты и не имеет доступа к содержимому переписок. Дополнительно Fake-TLS маскирует трафик под обычный HTTPS. MTProxy — встроенная функция самого Telegram, а не сторонний инструмент." data-en="Yes. Telegram encrypts all traffic using MTProto 2.0. The proxy server only relays encrypted packets and has no access to message content. On top of that, Fake-TLS disguises traffic as regular HTTPS. MTProxy is a built-in Telegram feature, not a third-party tool.">Да. Telegram шифрует весь трафик протоколом MTProto 2.0. Прокси-сервер передает только зашифрованные пакеты и не имеет доступа к содержимому переписок. Дополнительно Fake-TLS маскирует трафик под обычный HTTPS. MTProxy — встроенная функция самого Telegram, а не сторонний инструмент.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q" data-ru="Нужно ли устанавливать приложение?" data-en="Do I need to install an app?">Нужно ли устанавливать приложение?</div>
@@ -379,7 +425,19 @@
         </div>
         <div class="faq-item">
             <div class="faq-q" data-ru="Сколько стоит?" data-en="How much does it cost?">Сколько стоит?</div>
-            <div class="faq-a" data-ru="Первые 14 дней — бесплатно, без ввода карты. Потом — доступная подписка через Telegram Stars." data-en="First 14 days — free, no card required. Then — affordable subscription via Telegram Stars.">Первые 14 дней — бесплатно, без ввода карты. Потом — доступная подписка через Telegram Stars.</div>
+            <div class="faq-a" data-ru="Первые 14 дней бесплатно, без ввода карты. Потом 101 Telegram Star в месяц (около 130 ₽). Оплата прямо в Telegram, без сторонних сервисов." data-en="First 14 days free, no card required. Then 101 Telegram Stars per month (~$1.50). Payment right inside Telegram, no third-party services.">Первые 14 дней бесплатно, без ввода карты. Потом 101 Telegram Star в месяц (около 130 ₽). Оплата прямо в Telegram, без сторонних сервисов.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" data-ru="Зачем платить, если есть бесплатные прокси?" data-en="Why pay when there are free proxies?">Зачем платить, если есть бесплатные прокси?</div>
+            <div class="faq-a" data-ru="Бесплатные прокси перегружены, работают нестабильно, и неизвестно кто и зачем их содержит. У GhostRoute выделенные серверы с гарантированной скоростью. Модель простая: вы платите за инфраструктуру, а не «расплачиваетесь» своими данными." data-en="Free proxies are overloaded, unreliable, and it's unclear who runs them and why. GhostRoute uses dedicated servers with guaranteed speed. The model is simple: you pay for infrastructure, not &quot;pay&quot; with your data.">Бесплатные прокси перегружены, работают нестабильно, и неизвестно кто и зачем их содержит. У GhostRoute выделенные серверы с гарантированной скоростью. Модель простая: вы платите за инфраструктуру, а не «расплачиваетесь» своими данными.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" data-ru="Кто за этим стоит?" data-en="Who's behind this?">Кто за этим стоит?</div>
+            <div class="faq-a" data-ru="Независимый проект. Серверы расположены за пределами РФ. Поддержка доступна в Telegram: @GhostRouteX" data-en="An independent project. Servers located outside Russia. Support available on Telegram: @GhostRouteX">Независимый проект. Серверы расположены за пределами РФ. Поддержка доступна в Telegram: @GhostRouteX</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" data-ru="Не сломает банковские приложения?" data-en="Will it break my banking apps?">Не сломает банковские приложения?</div>
+            <div class="faq-a" data-ru="Нет. В отличие от VPN, GhostRoute работает только внутри Telegram. Банки, браузер и все остальные приложения работают напрямую, без каких-либо изменений." data-en="No. Unlike a VPN, GhostRoute works only inside Telegram. Banking apps, your browser, and everything else work directly, without any changes.">Нет. В отличие от VPN, GhostRoute работает только внутри Telegram. Банки, браузер и все остальные приложения работают напрямую, без каких-либо изменений.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q" data-ru="Что если прокси заблокируют?" data-en="What if the proxy gets blocked?">Что если прокси заблокируют?</div>

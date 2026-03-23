@@ -5,7 +5,7 @@
     <loc>https://ghostroutex.github.io/</loc>
     <xhtml:link rel="alternate" hreflang="ru" href="https://ghostroutex.github.io/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ghostroutex.github.io/?lang=en"/>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -13,7 +13,7 @@
     <loc>https://ghostroutex.github.io/telegram-proxy/</loc>
     <xhtml:link rel="alternate" hreflang="ru" href="https://ghostroutex.github.io/telegram-proxy/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ghostroutex.github.io/telegram-proxy/?lang=en"/>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -21,7 +21,7 @@
     <loc>https://ghostroutex.github.io/mtproxy-vs-vpn/</loc>
     <xhtml:link rel="alternate" hreflang="ru" href="https://ghostroutex.github.io/mtproxy-vs-vpn/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ghostroutex.github.io/mtproxy-vs-vpn/?lang=en"/>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -29,7 +29,15 @@
     <loc>https://ghostroutex.github.io/how-to-unblock-telegram/</loc>
     <xhtml:link rel="alternate" hreflang="ru" href="https://ghostroutex.github.io/how-to-unblock-telegram/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ghostroutex.github.io/how-to-unblock-telegram/?lang=en"/>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ghostroutex.github.io/how-to-setup-mtproxy/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ghostroutex.github.io/how-to-setup-mtproxy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ghostroutex.github.io/how-to-setup-mtproxy/?lang=en"/>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
