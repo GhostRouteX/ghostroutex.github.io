@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как настроить MTProxy для Telegram — пошаговая инструкция | GhostRoute</title>
+    <meta name="description" content="Как настроить MTProxy для Telegram за 30 секунд. Пошаговая инструкция: получение ключа через бота GhostRoute, подключение Fake-TLS прокси без VPN и приложений.">
+    <meta name="keywords" content="как настроить mtproxy, mtproxy настройка, настройка прокси телеграм, mtproxy telegram настройка, настроить прокси для телеграм, mtproxy fake-tls">
+
+    <link rel="canonical" href="https://ghostroutex.github.io/how-to-setup-mtproxy/">
+    <link rel="alternate" hreflang="ru" href="https://ghostroutex.github.io/how-to-setup-mtproxy/">
+    <link rel="alternate" hreflang="en" href="https://ghostroutex.github.io/how-to-setup-mtproxy/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://ghostroutex.github.io/how-to-setup-mtproxy/">
+
+    <meta property="og:title" content="Как настроить MTProxy для Telegram — пошаговая инструкция">
+    <meta property="og:description" content="Настройка MTProxy с Fake-TLS за 30 секунд через бота GhostRoute. Без VPN и приложений.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostroutex.github.io/how-to-setup-mtproxy/">
+    <meta property="og:image" content="https://ghostroutex.github.io/og-image.png">
+
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="apple-touch-icon" href="../logo.png">
+
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg-card: #111827;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99,102,241,0.15);
+            --cyan: #22d3ee;
+            --pink: #c084fc;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-heading: #f8fafc;
+            --border: #1e293b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg); color: var(--text); line-height: 1.7;
+        }
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 50;
+            background: rgba(10,14,23,0.85); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 800px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 24px;
+        }
+        .logo {
+            font-size: 20px; font-weight: 700; color: var(--text-heading);
+            text-decoration: none; display: flex; align-items: center; gap: 8px;
+        }
+        .logo img { height: 28px; width: 28px; border-radius: 50%; object-fit: cover; }
+        .logo > span > span { color: var(--accent-light); }
+        .nav-cta {
+            background: var(--accent); color: #fff; text-decoration: none;
+            padding: 8px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+            transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--accent-light); }
+        .article {
+            max-width: 800px; margin: 0 auto; padding: 100px 24px 60px;
+        }
+        .article h1 {
+            font-size: clamp(28px, 4vw, 42px); font-weight: 800;
+            color: var(--text-heading); line-height: 1.2; margin-bottom: 24px;
+        }
+        .article h1 .gradient {
+            background: linear-gradient(135deg, var(--cyan), var(--accent-light), var(--pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .article h2 {
+            font-size: 24px; font-weight: 700; color: var(--text-heading);
+            margin: 40px 0 16px;
+        }
+        .article p { margin-bottom: 16px; font-size: 17px; }
+        .article a { color: var(--accent-light); text-decoration: none; }
+        .article a:hover { text-decoration: underline; }
+        .steps {
+            counter-reset: step; margin: 24px 0;
+        }
+        .step-item {
+            display: flex; gap: 20px; margin-bottom: 24px; align-items: flex-start;
+        }
+        .step-num {
+            width: 48px; height: 48px; min-width: 48px; border-radius: 50%;
+            background: var(--accent-glow); border: 2px solid var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; font-weight: 700; color: var(--accent-light);
+        }
+        .step-content h3 {
+            font-size: 18px; font-weight: 600; color: var(--text-heading);
+            margin-bottom: 4px;
+        }
+        .step-content p { margin-bottom: 0; font-size: 16px; color: var(--text-muted); }
+        .tip-box {
+            background: var(--accent-glow); border: 1px solid rgba(99,102,241,0.3);
+            border-radius: 12px; padding: 20px; margin: 24px 0;
+            font-size: 16px;
+        }
+        .tip-box strong { color: var(--accent-light); }
+        .article ul { margin: 0 0 16px 24px; }
+        .article li { margin-bottom: 8px; font-size: 17px; }
+        .cta-box {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(99,102,241,0.08) 50%, rgba(34,211,238,0.05) 100%);
+            border: 1px solid var(--border); border-radius: 20px;
+            padding: 40px; text-align: center; margin: 48px 0;
+        }
+        .cta-box h2 { margin-top: 0; }
+        .cta-box p { color: var(--text-muted); }
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+            color: #fff; text-decoration: none;
+            padding: 16px 36px; border-radius: 12px;
+            font-size: 18px; font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 40px var(--accent-glow), 0 4px 20px rgba(99,102,241,0.3);
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 60px rgba(99,102,241,0.4), 0 8px 30px rgba(99,102,241,0.3);
+        }
+        .related { margin: 0 0 24px; }
+        .related h3 { font-size: 18px; font-weight: 600; color: var(--text-heading); margin-bottom: 12px; }
+        .related ul { list-style: none; margin: 0; padding: 0; }
+        .related li { margin-bottom: 8px; }
+        .related a { font-size: 16px; }
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px; text-align: center; font-size: 13px; color: var(--text-muted);
+        }
+        footer a { color: var(--accent-light); text-decoration: none; margin: 0 12px; }
+        @media (max-width: 640px) {
+            .article { padding-top: 80px; }
+            .cta-box { padding: 28px 20px; }
+            .cta-btn { padding: 14px 28px; font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="logo"><img src="../logo.png" alt="GhostRoute"><span>Ghost<span>Route</span></span></a>
+        <a href="https://t.me/GhostRouteX_bot?start=src_site-mtproxy" class="nav-cta" data-ru="Подключить" data-en="Connect">Подключить</a>
+    </div>
+</nav>
+
+<article class="article">
+    <h1><span data-ru="Как настроить MTProxy для Telegram —" data-en="How to set up MTProxy for Telegram —">Как настроить MTProxy для Telegram —</span> <span class="gradient" data-ru="пошаговая инструкция" data-en="step-by-step guide">пошаговая инструкция</span></h1>
+
+    <p data-ru="MTProxy — это прокси-протокол, встроенный прямо в Telegram. Он работает только с мессенджером и не требует отдельных приложений. С GhostRoute настройка занимает 30 секунд — без технических знаний, без VPN, без регистраций." data-en="MTProxy is a proxy protocol built right into Telegram. It works only with the messenger and requires no separate apps. With GhostRoute, setup takes 30 seconds — no technical knowledge, no VPN, no signups.">MTProxy — это прокси-протокол, встроенный прямо в Telegram. Он работает только с мессенджером и не требует отдельных приложений. С GhostRoute настройка занимает 30 секунд — без технических знаний, без VPN, без регистраций.</p>
+
+    <h2 data-ru="Что такое MTProxy" data-en="What is MTProxy">Что такое MTProxy</h2>
+
+    <p data-ru="MTProxy — протокол, разработанный командой Telegram специально для обхода блокировок. В отличие от SOCKS5 или HTTP-прокси, он интегрирован в приложение и работает только с Telegram-трафиком." data-en="MTProxy is a protocol developed by the Telegram team specifically for bypassing blocks. Unlike SOCKS5 or HTTP proxies, it's integrated into the app and works only with Telegram traffic.">MTProxy — протокол, разработанный командой Telegram специально для обхода блокировок. В отличие от SOCKS5 или HTTP-прокси, он интегрирован в приложение и работает только с Telegram-трафиком.</p>
+
+    <p data-ru="GhostRoute использует продвинутую версию — MTProxy с Fake-TLS. Ваше соединение маскируется под обычный HTTPS-трафик, что делает его неотличимым от посещения обычного сайта." data-en="GhostRoute uses an advanced version — MTProxy with Fake-TLS. Your connection is disguised as regular HTTPS traffic, making it indistinguishable from visiting a normal website.">GhostRoute использует продвинутую версию — MTProxy с Fake-TLS. Ваше соединение маскируется под обычный HTTPS-трафик, что делает его неотличимым от посещения обычного сайта.</p>
+
+    <p><a href="../mtproxy-vs-vpn/" data-ru="Подробное сравнение MTProxy и VPN →" data-en="Detailed MTProxy vs VPN comparison →">Подробное сравнение MTProxy и VPN →</a></p>
+
+    <h2 data-ru="Настройка через GhostRoute" data-en="Setup via GhostRoute">Настройка через GhostRoute</h2>
+
+    <div class="steps">
+        <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3 data-ru="Откройте бота GhostRoute" data-en="Open the GhostRoute bot">Откройте бота GhostRoute</h3>
+                <p data-ru="Перейдите по ссылке @GhostRouteX_bot в Telegram и нажмите /start. Бот поздоровается и создаст ваш аккаунт автоматически." data-en="Go to @GhostRouteX_bot in Telegram and tap /start. The bot will greet you and create your account automatically.">Перейдите по ссылке @GhostRouteX_bot в Telegram и нажмите /start. Бот поздоровается и создаст ваш аккаунт автоматически.</p>
+            </div>
+        </div>
+        <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3 data-ru="Получите персональный ключ" data-en="Get your personal key">Получите персональный ключ</h3>
+                <p data-ru="Бот мгновенно сгенерирует Fake-TLS прокси-ключ и выдаст ссылку для подключения. Ключ уникален — только для вас." data-en="The bot instantly generates a Fake-TLS proxy key and gives you a connection link. The key is unique — just for you.">Бот мгновенно сгенерирует Fake-TLS прокси-ключ и выдаст ссылку для подключения. Ключ уникален — только для вас.</p>
+            </div>
+        </div>
+        <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h3 data-ru="Нажмите «Подключить»" data-en="Tap 'Connect'">Нажмите «Подключить»</h3>
+                <p data-ru="Нажмите на ссылку от бота. Telegram предложит подключить прокси — подтвердите. Готово, Telegram теперь работает через защищённый канал." data-en="Tap the link from the bot. Telegram will offer to connect the proxy — confirm. Done, Telegram now works through a secure channel.">Нажмите на ссылку от бота. Telegram предложит подключить прокси — подтвердите. Готово, Telegram теперь работает через защищённый канал.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <strong data-ru="Подсказка:" data-en="Tip:">Подсказка:</strong>
+        <span data-ru=" Прокси настраивается один раз и работает постоянно. Один ключ — все устройства: Android, iOS, Windows, macOS, Linux. Откройте бота с нового устройства, чтобы подключить его." data-en=" The proxy is set up once and works permanently. One key — all devices: Android, iOS, Windows, macOS, Linux. Open the bot from a new device to connect it."> Прокси настраивается один раз и работает постоянно. Один ключ — все устройства: Android, iOS, Windows, macOS, Linux. Откройте бота с нового устройства, чтобы подключить его.</span>
+    </div>
+
+    <h2 data-ru="Почему Fake-TLS важен" data-en="Why Fake-TLS matters">Почему Fake-TLS важен</h2>
+
+    <p data-ru="Обычные MTProxy-ключи легко обнаруживаются и блокируются провайдерами через DPI (глубокий анализ пакетов). Fake-TLS оборачивает MTProxy-соединение в TLS-рукопожатие, маскируя его под HTTPS-трафик к популярному сайту." data-en="Regular MTProxy keys are easily detected and blocked by ISPs through DPI (deep packet inspection). Fake-TLS wraps the MTProxy connection in a TLS handshake, disguising it as HTTPS traffic to a popular website.">Обычные MTProxy-ключи легко обнаруживаются и блокируются провайдерами через DPI (глубокий анализ пакетов). Fake-TLS оборачивает MTProxy-соединение в TLS-рукопожатие, маскируя его под HTTPS-трафик к популярному сайту.</p>
+
+    <p data-ru="Что видит провайдер: обычное HTTPS-соединение. Что происходит на самом деле: вы в Telegram. Именно поэтому Fake-TLS работает даже в странах с жёсткой интернет-цензурой." data-en="What the ISP sees: a regular HTTPS connection. What's actually happening: you're on Telegram. That's why Fake-TLS works even in countries with strict internet censorship.">Что видит провайдер: обычное HTTPS-соединение. Что происходит на самом деле: вы в Telegram. Именно поэтому Fake-TLS работает даже в странах с жёсткой интернет-цензурой.</p>
+
+    <p><a href="../how-to-unblock-telegram/" data-ru="Как обойти блокировку Telegram →" data-en="How to unblock Telegram →">Как обойти блокировку Telegram →</a></p>
+
+    <h2 data-ru="Если что-то не работает" data-en="Troubleshooting">Если что-то не работает</h2>
+
+    <ul>
+        <li data-ru="Прокси не подключается — перезапустите Telegram и нажмите на ссылку от бота заново. Если не помогает — запросите новый ключ командой /start." data-en="Proxy won't connect — restart Telegram and tap the bot link again. If that doesn't help — request a new key with /start.">Прокси не подключается — перезапустите Telegram и нажмите на ссылку от бота заново. Если не помогает — запросите новый ключ командой /start.</li>
+        <li data-ru="Медленная скорость — GhostRoute автоматически выбирает лучший сервер. Попробуйте отключиться и подключиться снова. Прокси влияет только на Telegram — проверьте, не тормозит ли интернет в целом." data-en="Slow speed — GhostRoute auto-selects the best server. Try disconnecting and reconnecting. The proxy only affects Telegram — check if your internet is slow overall.">Медленная скорость — GhostRoute автоматически выбирает лучший сервер. Попробуйте отключиться и подключиться снова. Прокси влияет только на Telegram — проверьте, не тормозит ли интернет в целом.</li>
+        <li data-ru="Работает ли на моём устройстве? — Да, если на нём есть Telegram. Android, iOS, Windows, macOS, Linux, Telegram Desktop — везде одинаково." data-en="Does it work on my device? — Yes, if Telegram is installed. Android, iOS, Windows, macOS, Linux, Telegram Desktop — works the same everywhere.">Работает ли на моём устройстве? — Да, если на нём есть Telegram. Android, iOS, Windows, macOS, Linux, Telegram Desktop — везде одинаково.</li>
+    </ul>
+
+    <p><a href="../telegram-proxy/" data-ru="Подробнее о том, как работает прокси для Telegram →" data-en="More about how Telegram proxy works →">Подробнее о том, как работает прокси для Telegram →</a></p>
+
+    <div class="cta-box">
+        <h2 data-ru="Настройте прокси за 30 секунд" data-en="Set up proxy in 30 seconds">Настройте прокси за 30 секунд</h2>
+        <p data-ru="Бесплатно 14 дней. Без карты, без регистрации." data-en="Free for 14 days. No card, no signup.">Бесплатно 14 дней. Без карты, без регистрации.</p>
+        <a href="https://t.me/GhostRouteX_bot?start=src_site-mtproxy" class="cta-btn" data-ru="&#9889; Подключить GhostRoute" data-en="&#9889; Connect GhostRoute">&#9889; Подключить GhostRoute</a>
+    </div>
+
+    <div class="related">
+        <h3 data-ru="Читайте также" data-en="Related articles">Читайте также</h3>
+        <ul>
+            <li><a href="../telegram-proxy/" data-ru="Прокси для Telegram — бесплатно 14 дней" data-en="Telegram Proxy — free 14 days">Прокси для Telegram — бесплатно 14 дней</a></li>
+            <li><a href="../mtproxy-vs-vpn/" data-ru="MTProxy или VPN — что лучше?" data-en="MTProxy or VPN — which is better?">MTProxy или VPN — что лучше?</a></li>
+            <li><a href="../how-to-unblock-telegram/" data-ru="Как обойти блокировку Telegram" data-en="How to unblock Telegram">Как обойти блокировку Telegram</a></li>
+        </ul>
+    </div>
+</article>
+
+<footer>
+    <div style="margin-bottom: 10px;">
+        <a href="https://t.me/GhostRouteX_bot?start=src_site-mtproxy" data-ru="Бот" data-en="Bot">Бот</a>
+        <span style="color:var(--border);">·</span>
+        <a href="https://t.me/GhostRouteX" data-ru="Канал" data-en="Channel">Канал</a>
+        <span style="color:var(--border);">·</span>
+        <a href="../" data-ru="Главная" data-en="Home">Главная</a>
+    </div>
+    <span data-ru="GhostRoute · Быстрый и незаметный прокси для Telegram" data-en="GhostRoute · Fast and invisible Telegram proxy">GhostRoute · Быстрый и незаметный прокси для Telegram</span>
+</footer>
+
+<script>
+    function setLang(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
+            if (el.tagName === 'META') return;
+            el.textContent = el.getAttribute('data-' + lang);
+        });
+        if (lang === 'en') {
+            document.title = 'How to set up MTProxy for Telegram — step-by-step guide | GhostRoute';
+            document.querySelector('meta[name="description"]').content = 'How to set up MTProxy for Telegram in 30 seconds. Step-by-step guide via GhostRoute bot: get your key, connect Fake-TLS proxy without VPN or apps.';
+        } else {
+            document.title = 'Как настроить MTProxy для Telegram — пошаговая инструкция | GhostRoute';
+            document.querySelector('meta[name="description"]').content = 'Как настроить MTProxy для Telegram за 30 секунд. Пошаговая инструкция: получение ключа через бота GhostRoute, подключение Fake-TLS прокси без VPN и приложений.';
+        }
+        try { localStorage.setItem('lang', lang); } catch(e) {}
+    }
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var saved = (function() { try { return localStorage.getItem('lang'); } catch(e) { return null; } })();
+        var lang = params.get('lang') || saved || (navigator.language.startsWith('ru') ? 'ru' : 'en');
+        if (lang !== 'ru') setLang(lang);
+    })();
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Как настроить MTProxy для Telegram",
+    "description": "Пошаговая инструкция настройки MTProxy с Fake-TLS через бота GhostRoute.",
+    "step": [
+        {"@type": "HowToStep", "name": "Откройте бота", "text": "Перейдите по ссылке @GhostRouteX_bot в Telegram и нажмите /start"},
+        {"@type": "HowToStep", "name": "Получите ключ", "text": "Бот выдаст персональный Fake-TLS прокси-ключ и ссылку для подключения"},
+        {"@type": "HowToStep", "name": "Подключитесь", "text": "Нажмите на ссылку — Telegram автоматически настроит прокси"}
+    ],
+    "totalTime": "PT30S"
+}
+</script>
+
+</body>
+</html>
